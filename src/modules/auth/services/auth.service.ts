@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import * as moment from "moment";
 import { User } from "../models/user/user.model";
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -27,7 +28,13 @@ export class AuthService {
   async login(user: User) {
     const payload = { username: user.email, sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
+      expiresIn: moment().add(1, 'hour').unix(),
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email
+      }
     };
   }
 

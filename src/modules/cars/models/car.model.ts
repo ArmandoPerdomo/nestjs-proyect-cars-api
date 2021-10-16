@@ -15,7 +15,7 @@ export class Car {
   brand: string;
   model: string;
   color: string;
-  admissionDate: Date;
+  admissionDate: number;
   driver: string;
   active: boolean;
 

@@ -31,7 +31,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get()
+  @Get('session')
   getProfile(@Request() req) {
     return req.user;
   }
