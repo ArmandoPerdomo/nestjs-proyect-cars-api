@@ -32,8 +32,13 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('session')
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req) {
+    const email = req.user.username;
+    const user = await this.usersService.findOne({email});
+    return {
+      name: user.name,
+      email: user.email
+    }
   }
 
   @Post()
